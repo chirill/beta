@@ -16,7 +16,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $username = 'username';
+//    protected $username = 'username';
     protected $fillable = [
         'name', 'username', 'email', 'password','location_id','role_id','status',
     ];
@@ -31,7 +31,7 @@ class User extends Authenticatable
     ];
 
     public function role(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Role');
     }
 
     public function location(){
@@ -43,6 +43,13 @@ class User extends Authenticatable
             $this->attributes['password'] = bcrypt($value);
         }
 
+    }
+
+    public function isAdmin(){
+        if ($this->role->name =='administrator' ){
+            return true;
+        }
+        return false;
     }
 
 }

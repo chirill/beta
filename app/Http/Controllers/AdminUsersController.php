@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,8 @@ class AdminUsersController extends Controller
     public function create()
     {
         //
-        return view('admin.users.create');
+        $roles = Role::pluck('name','id')->all();
+        return view('admin.users.create',compact('roles'));
     }
 
     /**
@@ -40,6 +42,7 @@ class AdminUsersController extends Controller
     {
         //
         User::create($request->all());
+
         return redirect('admin/users');
     }
 
@@ -52,7 +55,8 @@ class AdminUsersController extends Controller
     public function show(User $user)
     {
         //
-        return view('admin.users.show',compact('user'));
+
+        return view('admin.users.show',compact('user','roles'));
     }
 
     /**
@@ -61,9 +65,11 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         //
+        $roles = Role::pluck('name','id')->all();
+        return view('admin.users.edit',compact('user','roles'));
     }
 
     /**
@@ -76,6 +82,8 @@ class AdminUsersController extends Controller
     public function update(Request $request, $id)
     {
         //
+        User::findOrFail($id)->update($request->all());
+        return redirect('admin/users');
     }
 
     /**
@@ -87,5 +95,20 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
+        User::findOrFail($id)->delete();
+        return redirect('admin/users');
     }
+
+    public function trashed(){
+        //
+        $users = User::onlyTrashed()->get();
+        return view('admin.users.trash',compact('users'));
+    }
+
+    public function restore($id){
+        $user = User::onlyTrashed()->whereId($id)->restore();
+        return redirect('admin/users');
+    }
+
+
 }

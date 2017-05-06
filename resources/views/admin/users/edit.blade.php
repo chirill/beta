@@ -1,8 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-    <h1>Create User</h1>
-
-    {!! Form::open(['method'=>'POST','action'=>'AdminUsersController@store']) !!}
+    <h1>Edit Users</h1>
+    {!! Form::model($user,['method'=>'PATCH','action'=>['AdminUsersController@update',$user->id]]) !!}
     <div class="form-group">
         {!! Form::label('name','Name:') !!}
         {!! Form::text('name',null,['class'=>'form-control']) !!}
@@ -21,16 +20,18 @@
     </div>
     <div class="form-group">
         {!! Form::label('status','Status:') !!}
-        {!! Form::select('status',[ 1 => 'Active', 0 => 'Not active'],0,['class'=>'form-control']) !!}
+        {!! Form::select('status',[ 1 => 'Active', 0 => 'Not active'],null,['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('role_id','Role:') !!}
         {!! Form::select('role_id',[''=>'Choose role'] + $roles,null,['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
-        {!! Form::submit('Create Username',['class'=>'btn btn-primary']) !!}
+        {!! Form::submit('Update User',['class'=>'btn btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}
-
+    {!! Form::open(['method'=>'DELETE','action'=>['AdminUsersController@destroy',$user->id]]) !!}
+    {!! Form::submit('Delete User',['class'=>'btn btn-danger']) !!}
+    {!! Form::close() !!}
     @stop
