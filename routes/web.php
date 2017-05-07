@@ -28,6 +28,14 @@ Route::group(['middleware'=>'admin'],function(){
         return view('admin.index');
     })->name('admin');
 
+    Route::get('/admin/roles/trashed','AdminRolesController@trashed')->name('roles.trashed');
+    Route::get('/admin/roles/restore/{user}','AdminRolesController@restore');
+    Route::resource('/admin/roles','AdminRolesController');
+
+    Route::get('/admin/locations/trashed','AdminLocationsController@trashed')->name('locations.trashed');
+    Route::get('/admin/locations/restore{location}','AdminLocationsController@restore');
+    Route::resource('/admin/locations','AdminLocationsController');
+
 });
 
 

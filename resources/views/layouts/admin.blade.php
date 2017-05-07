@@ -134,7 +134,7 @@
                         <a href="#"><i class="fa fa-user fa-fw"></i>Users<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{route('users.index')}}">All Users</a>
+                                <a href="{{route('users.index')}}">All Users <span class="badge pull-right">{{count(App\User::all())}}</span></a>
                             </li>
 
                             <li>
@@ -142,7 +142,7 @@
                             </li>
 
                             <li>
-                                <a href="{{route('users.trashed')}}">Trash</a>
+                                <a href="{{route('users.trashed')}}">Trash <span class="badge pull-right">{{count(App\User::onlyTrashed()->get())}}</span></a>
                             </li>
 
                         </ul>
@@ -185,11 +185,15 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i>Roles<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-{{--                                <a href="{{route('roles.index')}}">All Roles</a>--}}
+
+                                <a href="{{route('roles.index')}}">All Roles <span class="badge pull-right">{{count(App\Role::all())}}</span></a>
                             </li>
 
                             <li>
-{{--                                <a href="{{route('roles.create')}}">Create Role</a>--}}
+                                <a href="{{route('roles.create')}}">Create Role</a>
+                            </li>
+                            <li>
+                                <a href="{{route('roles.trashed')}}">Trash <span class="badge pull-right">{{count(App\Role::onlyTrashed()->get())}}</span></a>
                             </li>
 
                         </ul>

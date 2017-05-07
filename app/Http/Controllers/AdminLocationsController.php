@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
+use App\Location;
 use Illuminate\Http\Request;
 
-class AdminRolesController extends Controller
+class AdminLocationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,6 @@ class AdminRolesController extends Controller
     public function index()
     {
         //
-        $roles = Role::all();
-        return view('admin.roles.index',compact('roles'));
     }
 
     /**
@@ -27,7 +25,6 @@ class AdminRolesController extends Controller
     public function create()
     {
         //
-        return view('admin.roles.create');
     }
 
     /**
@@ -39,68 +36,50 @@ class AdminRolesController extends Controller
     public function store(Request $request)
     {
         //
-        Role::create($request->all());
-        return redirect('admin/roles');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Role  $role
+     * @param  \App\Location  $location
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(Location $location)
     {
         //
-        return view('admin.roles.show',compact('role'));
-
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Role  $role
+     * @param  \App\Location  $location
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Location $location)
     {
         //
-        return view('admin.roles.edit',compact('role'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Role  $role
+     * @param  \App\Location  $location
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, Location $location)
     {
         //
-        $role->update($request->all());
-        return redirect('admin/roles');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Role  $role
+     * @param  \App\Location  $location
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Location $location)
     {
         //
-        $role->delete();
-        return redirect('admin/roles');
-    }
-
-    public function trashed(){
-        $roles = Role::onlyTrashed()->get();
-        return view('admin.roles.trash',compact('roles'));
-    }
-    public function restore($id){
-        $user = Role::onlyTrashed()->whereId($id)->restore();
-        return redirect('admin/roles');
     }
 }
