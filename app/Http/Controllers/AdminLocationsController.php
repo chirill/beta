@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Location;
+use App\User;
 use Illuminate\Http\Request;
 
 class AdminLocationsController extends Controller
@@ -15,6 +16,8 @@ class AdminLocationsController extends Controller
     public function index()
     {
         //
+        $locations = Location::all();
+        return view('admin.locations.index',compact('locations'));
     }
 
     /**
@@ -25,6 +28,7 @@ class AdminLocationsController extends Controller
     public function create()
     {
         //
+        return view('admin.locations.create');
     }
 
     /**
@@ -36,6 +40,8 @@ class AdminLocationsController extends Controller
     public function store(Request $request)
     {
         //
+        Location::create($request->all());
+        return redirect('admin/locations');
     }
 
     /**
@@ -47,6 +53,7 @@ class AdminLocationsController extends Controller
     public function show(Location $location)
     {
         //
+        return view('admin.locations.show',compact('location'));
     }
 
     /**
@@ -58,6 +65,7 @@ class AdminLocationsController extends Controller
     public function edit(Location $location)
     {
         //
+        return view('admin.locations.edit',compact('location'));
     }
 
     /**
@@ -70,6 +78,8 @@ class AdminLocationsController extends Controller
     public function update(Request $request, Location $location)
     {
         //
+        $location->update($request->all());
+        return redirect('admin/locations');
     }
 
     /**
@@ -81,5 +91,22 @@ class AdminLocationsController extends Controller
     public function destroy(Location $location)
     {
         //
+        foreach($location->users as $user){
+            $user = User::findOrFail($user->id);
+            $user->location_id = null;
+            $user->update();
+        }
+        $location->delete();
+        return redirect('admin/locations');
+    }
+
+    public function trashed(){
+        $locations = Location::onlyTrashed()->get();
+        return view('admin.locations.trash',compact('locations'));
+    }
+
+    public function restore($id){
+        Location::onlyTrashed()->whereId($id)->restore();
+        return redirect('admin/locations');
     }
 }

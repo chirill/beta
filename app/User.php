@@ -20,6 +20,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'username', 'email', 'password','location_id','role_id','status',
     ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -31,7 +36,7 @@ class User extends Authenticatable
     ];
 
     public function role(){
-        return $this->belongsTo('App\Role');
+        return $this->belongsTo('App\Role');//->withTrashed();
     }
 
     public function location(){

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Location;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class AdminUsersController extends Controller
     {
         //
         $roles = Role::pluck('name','id')->all();
-        return view('admin.users.create',compact('roles'));
+        $locations = Location::pluck('name','id')->all();
+        return view('admin.users.create',compact('roles','locations'));
     }
 
     /**
@@ -41,7 +43,13 @@ class AdminUsersController extends Controller
     public function store(Request $request)
     {
         //
-        User::create($request->all());
+        if (empty($request->password)){
+            $input = $request->all();
+            $input['password'] = bcrypt('Lotus!234');
+        }else{
+            $input = $request->all();
+        }
+        User::create($input);
 
         return redirect('admin/users');
     }
@@ -69,7 +77,8 @@ class AdminUsersController extends Controller
     {
         //
         $roles = Role::pluck('name','id')->all();
-        return view('admin.users.edit',compact('user','roles'));
+        $locations = Location::pluck('name','id')->all();
+        return view('admin.users.edit',compact('user','roles','locations'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 
 class AdminRolesController extends Controller
@@ -91,6 +92,11 @@ class AdminRolesController extends Controller
     public function destroy(Role $role)
     {
         //
+        foreach($role->users as $user){
+            $user = User::findOrFail($user->id);
+            $user->role_id = null;
+            $user->update();
+        }
         $role->delete();
         return redirect('admin/roles');
     }
@@ -100,7 +106,7 @@ class AdminRolesController extends Controller
         return view('admin.roles.trash',compact('roles'));
     }
     public function restore($id){
-        $user = Role::onlyTrashed()->whereId($id)->restore();
+        Role::onlyTrashed()->whereId($id)->restore();
         return redirect('admin/roles');
     }
 }

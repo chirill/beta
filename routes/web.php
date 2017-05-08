@@ -33,8 +33,12 @@ Route::group(['middleware'=>'admin'],function(){
     Route::resource('/admin/roles','AdminRolesController');
 
     Route::get('/admin/locations/trashed','AdminLocationsController@trashed')->name('locations.trashed');
-    Route::get('/admin/locations/restore{location}','AdminLocationsController@restore');
+    Route::get('/admin/locations/restore{location}','AdminLocationsController@restore')->name('locations.restore');
     Route::resource('/admin/locations','AdminLocationsController');
+
+    Route::get('/admin/printers/trashed','AdminPrintersController@trashed')->name('printers.trashed');
+    Route::get('/admin/printers/restore{location}','AdminPrintersController@restore')->name('printers.restore');
+    Route::resource('/admin/printers','AdminPrintersController');
 
 });
 

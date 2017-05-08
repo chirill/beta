@@ -169,11 +169,14 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i>Locations<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-{{--                                <a href="{{route('locations.index')}}">All Locations</a>--}}
+                                <a href="{{route('locations.index')}}">All Locations <span class="badge pull-right">{{count(App\Location::all())}}</span></a>
                             </li>
 
                             <li>
-{{--                                <a href="{{route('locations.create')}}">Create Location</a>--}}
+                                <a href="{{route('locations.create')}}">Create Location</a>
+                            </li>
+                            <li>
+                                <a href="{{route('locations.trashed')}}">Trash <span class="badge pull-right">{{count(App\Location::onlyTrashed()->get())}}</span></a>
                             </li>
 
                         </ul>
