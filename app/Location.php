@@ -27,4 +27,7 @@ class Location extends Model
     public function printers(){
         return $this->hasMany('App\Printer');
     }
+    public function comps(){
+        return $this->hasMany('App\Comp');
+    }
 }

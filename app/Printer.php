@@ -15,15 +15,23 @@ class Printer extends Model
         'user',
         'password',
         'location_id',
-        'path_driver',
+        'path',
+        'localizare',
     ];
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at'
     ];
+    protected $uploads = '/driver/';
 
     public function location(){
         return $this->belongsTo('App\Location');
+    }
+
+
+    //this is accessor
+    public function getPathAttribute($driver){
+        return $this->uploads.$driver;
     }
 }

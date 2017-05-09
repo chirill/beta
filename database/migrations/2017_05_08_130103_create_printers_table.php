@@ -17,10 +17,11 @@ class CreatePrintersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('ip');
-            $table->string('user');
-            $table->string('password');
+            $table->string('user')->nullable();
+            $table->string('password')->nullable();
             $table->integer('location_id')->nullable()->unsigned()->index();
-            $table->string('path_driver');
+            $table->string('path')->nullable();
+            $table->string('localizare')->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at');
         });

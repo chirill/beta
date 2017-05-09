@@ -150,14 +150,17 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Printers<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/posts">All Posts</a>
+                                <a href="{{route('printers.index')}}">All Printers <span class="badge pull-right">{{count(App\Printer::all())}}</span></a>
                             </li>
 
                             <li>
-                                <a href="/posts/create">Create Post</a>
+                                <a href="{{route('printers.create')}}">Create Printer</a>
+                            </li>
+                            <li>
+                                <a href="{{route('printers.trashed')}}">Trash <span class="badge pull-right">{{count(App\Printer::onlyTrashed()->get())}}</span></a>
                             </li>
 
                         </ul>
@@ -166,7 +169,7 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Locations<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-globe fa-fw"></i> Locations<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{{route('locations.index')}}">All Locations <span class="badge pull-right">{{count(App\Location::all())}}</span></a>

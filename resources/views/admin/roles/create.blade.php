@@ -12,5 +12,5 @@
     </div>
 
     {!! Form::close() !!}
-
+    @include('includes.form_error');
     @stop

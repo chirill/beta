@@ -29,12 +29,12 @@
     </div>
     <div class="form-group">
         {!! Form::label('location_id','Location:') !!}
-        {!! Form::select('location_id',[null=>'Choose Location'] + $locations,null,['class'=>'form-control']) !!}
+        {!! Form::select('location_id',[''=>'Choose Location'] + $locations,null,['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::submit('Create Username',['class'=>'btn btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}
-
+    @include('includes.form_error');
     @stop
