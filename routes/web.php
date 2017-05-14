@@ -40,7 +40,7 @@ Route::group(['middleware'=>'admin'],function(){
     Route::get('/admin/printers/restore{location}','AdminPrintersController@restore')->name('printers.restore');
     Route::resource('/admin/printers','AdminPrintersController');
 
-    Route::get('/broker/comps','BrokerCompsController');
+    Route::resource('/broker/comps','BrokerCompsController');
 
 });
 

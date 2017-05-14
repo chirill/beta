@@ -16,7 +16,7 @@ class AdminLocationsController extends Controller
     public function index()
     {
         //
-        $locations = Location::all();
+        $locations = Location::orderBy('name')->get();
         return view('admin.locations.index',compact('locations'));
     }
 

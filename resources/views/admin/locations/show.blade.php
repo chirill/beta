@@ -25,6 +25,30 @@
                 </tbody>
             </table>
         </div>
+        @if(count($location->printers)>=1)
+        <div class="col-sm-4">
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Printer Name</th>
+                        <th>IP</th>
+                        <th>Amplasare</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach($location->printers as $printer)
+                    <tr>
+                        <td>{{$printer->id}}</td>
+                        <td>{{$printer->name}}</td>
+                        <td>{{$printer->ip}}</td>
+                        <td>{{$printer->localizare}}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+        @endif
     </div>
 
 

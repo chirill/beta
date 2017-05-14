@@ -285,13 +285,13 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li class="active">
-                        <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-files-o fa-fw"></i> Broker<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="active" href="blank.html">Blank Page</a>
+                                <a class="active" href="{{route('comps.index')}}"> Broker PC</a>
                             </li>
                             <li>
-                                <a href="login.html">Login Page</a>
+                                <a href="{{route('comps.create')}}"> Create broker pc</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->

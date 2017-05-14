@@ -15,6 +15,12 @@ class CreateCompsTable extends Migration
     {
         Schema::create('comps', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->string('os');
+            $table->string('owner')->nullable();
+            $table->integer('teamviewer')->nullable()->unsignned();
+            $table->string('detalii')->nullable();
+            $table->integer('location_id')->unsigned()->nullable()->index();
             $table->timestamps();
         });
     }

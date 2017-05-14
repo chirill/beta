@@ -29,7 +29,7 @@ class AdminPrintersController extends Controller
     public function create()
     {
         //
-        $locations = Location::pluck('name','id')->all();
+        $locations = Location::orderBy('name')->pluck('name','id')->all();
         return view('admin.printers.create',compact('locations'));
     }
 
